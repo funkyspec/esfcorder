@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to ESFC Customer Weekly Ordering
+                    Welcome to ESFC Weekly Ordering
                 </div>
 
                 <div class="links">
