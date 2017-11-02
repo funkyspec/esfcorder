@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Welcome to ESFC Customer Weekly Ordering
                 </div>
 
                 <div class="links">
