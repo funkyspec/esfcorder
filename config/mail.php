@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@easternshorefoodcooperative.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'easternshorefoodcooperative@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'ESFC'),
     ],
 
