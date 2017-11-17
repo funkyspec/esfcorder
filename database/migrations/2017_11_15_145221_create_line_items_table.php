@@ -15,6 +15,10 @@ class CreateLineItemsTable extends Migration
     {
         Schema::create('line_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id')->unsigned();
+            $table->integer('producerprice_id')->unsigned();
+            $table->decimal('quantity', 8, 2);
+            $table->decimal('itemdiscount', 8, 2)->nullable();
             $table->timestamps();
         });
     }
