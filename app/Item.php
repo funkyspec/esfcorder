@@ -16,4 +16,12 @@ class Item extends Model
     {
         return $this->hasMany('App\ProducerPrice');
     }
+
+    /**
+     * Get the category for this item.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }
