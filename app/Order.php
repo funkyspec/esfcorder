@@ -32,4 +32,12 @@ class Order extends Model
         return $this->hasMany('App\LineItem');
     }
 
+    /**
+    * Get the offer related to this order.
+    */
+   public function offer()
+   {
+       return $this->belongsTo('App\Offer');
+   }
+
 }

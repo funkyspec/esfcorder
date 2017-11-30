@@ -34,6 +34,14 @@ class ProducerPrice extends Model
     }
 
     /**
+     * Get the offer for this producer price.
+     */
+    public function offer()
+    {
+        return $this->belongsTo('App\Offer');
+    }
+
+    /**
      * Get the line items for this producer price.
      */
     public function lineItems()
