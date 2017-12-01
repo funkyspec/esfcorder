@@ -10,7 +10,7 @@ class State extends Model
 
 
     /**
-     * Get the weekly producer prices for this producer.
+     * Get the producers in this state
      */
     public function producers()
     {
