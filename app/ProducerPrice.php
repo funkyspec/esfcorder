@@ -42,6 +42,14 @@ class ProducerPrice extends Model
     }
 
     /**
+     * Get the display category for this producer price.
+     */
+    public function displayCategory()
+    {
+        return $this->belongsTo('App\DisplayCategory');
+    }
+
+    /**
      * Get the line items for this producer price.
      */
     public function lineItems()
