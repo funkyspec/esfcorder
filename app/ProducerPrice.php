@@ -20,9 +20,9 @@ class ProducerPrice extends Model
     /**
      * Get the unit for this producer price.
      */
-    public function unit()
+    public function sellUnit()
     {
-        return $this->belongsTo('App\Unit');
+        return $this->belongsTo('App\Unit', 'sell_unit_id');
     }
 
     /**

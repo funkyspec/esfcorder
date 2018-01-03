@@ -22,3 +22,5 @@ Route::view('/', 'welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/offer/{id}', 'OfferController@available')->name('available');

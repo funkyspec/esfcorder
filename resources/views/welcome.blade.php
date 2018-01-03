@@ -74,6 +74,7 @@
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endauth
+                        <a href="{{ url('/offer/1') }}">This Week's Availability</a>
                 </div>
             @endif
 
