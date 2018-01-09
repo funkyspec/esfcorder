@@ -31,7 +31,13 @@
         <h3>{{ $dispcat->name}}</h3>
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-            <p>{{ $producerprice->item->name }} {{ $producerprice->non_mbr_price }} / {{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}  {{ $producerprice->notes }}</p>
+            <p>{{ $producerprice->item->name }}
+                @isset($producerprice->non_mbr_price)
+                &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                @endisset
+                @isset($producerprice->notes)
+                - {{ $producerprice->notes }}
+            @endisset</p>
             @endforeach
         </div>
         @endforeach
