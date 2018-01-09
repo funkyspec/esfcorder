@@ -12,7 +12,7 @@ class Unit extends Model
     /**
      * Get the weekly producer prices for this unit.
      */
-    public function producerPricesSell ()
+    public function producerPricesSellUnit ()
     {
         return $this->hasMany('App\ProducerPrice', 'sell_unit_id');
     }

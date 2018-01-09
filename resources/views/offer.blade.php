@@ -22,16 +22,18 @@
     </div>
 
     <div class="row">
-        <h4>This week's availability</h4>
+        <h2>This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
 
 
 
         @foreach ($dispcats as $dispcat)
-        <h5>{{ $dispcat->name}}</h5>
+        <div class="col-md-4">
+        <h3>{{ $dispcat->name}}</h3>
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-            <p>{{ $producerprice->item->name }} {{ $producerprice->non_mbr_price }} {{ $producerprice->notes }}</p>
+            <p>{{ $producerprice->item->name }} {{ $producerprice->non_mbr_price }} / {{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}  {{ $producerprice->notes }}</p>
             @endforeach
+        </div>
         @endforeach
 
 

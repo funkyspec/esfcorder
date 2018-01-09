@@ -22,7 +22,7 @@ class OfferController extends Controller
             $query ->where('offer_id', 1);
             })->get();
 
-        $producerprices = ProducerPrice::where('offer_id', $id)->with('item')->get();
+        $producerprices = ProducerPrice::where('offer_id', $id)->with(['item', 'sellUnit', 'producer'])->get();
         return view('offer', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
     }
 }
