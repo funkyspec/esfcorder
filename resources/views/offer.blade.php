@@ -12,9 +12,15 @@
     </div>
 
     <div class="row">
+        @if( $offer->active_flag == 1)
         <h2>This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
+        <button type="button" class="btn btn-primary">Order Online</button>
+        @else
+        <h2>Availability for week of {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
+        @endif
 
-
+    </div>
+    <div class="row">
 
         @foreach ($dispcats as $dispcat)
         <div class="col-md-4">
@@ -32,12 +38,11 @@
         </div>
         @endforeach
 
-
-
-
-
-
     </div>
+
+    @if( $offer->active_flag == 1)
+    <button type="button" class="btn btn-primary">Order Online</button>
+    @endif
 
 </div>
 

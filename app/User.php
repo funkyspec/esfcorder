@@ -27,11 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
+    /* *
      * Get the orders for the user.
-     */
+
     public function orders()
     {
         return $this->hasMany('App\Order');
-    }
+    }  */
 }
