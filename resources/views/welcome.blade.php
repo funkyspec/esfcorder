@@ -69,6 +69,7 @@
 
                 <div class="top-right links">
                         <a href="{{ url('/offer/1') }}">This Week's Availability</a>
+                        <a href="{{ url('/latestoffer') }}">Latest Availability</a>
 
                 </div>
 

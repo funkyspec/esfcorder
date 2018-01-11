@@ -3,10 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Offer;
+use App\ProducerPrice;
+use App\DisplayCategory;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
+
+    /**
+     * First step of ordering online - check membership
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function startOrder()
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +38,15 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($offer_id)
     {
         //
+        $offer = Offer::findOrFail($offer_id);
+
+        $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get();
+        $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
+
+        return view('orders.orderform', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
     }
 
     /**

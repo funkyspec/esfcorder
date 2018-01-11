@@ -23,6 +23,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/latestoffer', 'OfferController@latest')->name('latest');
+
 Route::get('/offer/{id}', 'OfferController@available')->name('available');
 
+Route::get('order/create/{offer_id}', 'OrderController@create');
+Route::post('order/startorder', 'OrderController@startOrder');
 Route::resource('orders', 'OrderController');
