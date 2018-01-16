@@ -12,12 +12,8 @@
     </div>
 
     <div class="row">
-        @if( $offer->active_flag == 1)
+
         <h2>This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
-        <button type="button" class="btn btn-primary">Order Online</button>
-        @else
-        <h2>Availability for week of {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
-        @endif
 
     </div>
     <div class="row">
@@ -40,19 +36,19 @@
 
     </div>
 
-    <form method="POST" action="/checkmember">
+    @if( $offer->active_flag == 1)
+    <form method="POST" action="/offer/checkmember">
         <div class="form-group">
+            <input id="offer_id" name="offer_id" type="hidden" value="{{ $offer->id }}">
+            {{ csrf_field() }}
             <label for="orderEmail">Email address</label>
             <input type="email" class="form-control" id="orderEmail" name="orderEmail" placeholder="Email">
         </div>
-
         <button type="submit" class="btn btn-primary">Order Online</button>
-        </form>
-
-    @if( $offer->active_flag == 1)
-    <button type="button" class="btn btn-primary">Order Online</button>
-    <a href="/order/create/{{ $offer->id }}" class="btn btn-primary active">Order Online</a>
+    </form>
     @endif
+
+
 
 </div>
 

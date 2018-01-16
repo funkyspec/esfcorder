@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Offer;
 use App\DisplayCategory;
 use App\ProducerPrice;
+use App\User;
 use App\Http\Controllers\Controller;
 
 class OfferController extends Controller
@@ -46,6 +49,27 @@ class OfferController extends Controller
 
             return view('offers.offer', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
         }
+    }
+
+    public function checkMember(Request $request) {
+        //need to use proper user/role ACL but for now do simple
+
+        $orderEmail = $request->input('orderEmail');
+
+        $offerId = $request->input('offer_id');
+
+        $esfcEmail = User::where('email', $orderEmail)->where('role_id', '<=', 3)->first();
+
+        if($esfcEmail) {
+            //set member status to member
+            $mbr = 1;
+        } else {
+            //set member status to non
+            $mbr = 0;
+        }
+
+        return redirect("order/create/$offerId/$orderEmail/$mbr");
+
     }
 
     //need show method for displaying previous weeks' offers

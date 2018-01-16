@@ -18,9 +18,14 @@
         <h2>Availability for week of {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
         @endif
 
+        <h4>{{ $orderemail }}</h4>
+        <h4>Membership status: {{ $mbr }}</h4>
+
     </div>
 
-    <!-- need to open order form here - for member or non-member pricing -->
+    <!-- need to open order form here -->
+
+    <!-- if branch - block to show member pricing and then block for non-member pricing -->
 
     <div class="row">
 
@@ -42,6 +47,8 @@
 
     </div>
 
+    <!-- ask for name, pickup method, and special instructions/notes -->
+    <!-- submit order, go to confirmation page -->
 
 </div>
 

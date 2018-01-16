@@ -38,7 +38,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($offer_id)
+    public function create($offer_id, $orderemail, $mbr)
     {
         //
         $offer = Offer::findOrFail($offer_id);
@@ -46,7 +46,7 @@ class OrderController extends Controller
         $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get();
         $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
-        return view('orders.orderform', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
+        return view('orders.orderform', ['offer' => $offer, 'orderemail'=>$orderemail, 'mbr'=>$mbr, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
     }
 
     /**
