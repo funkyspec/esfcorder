@@ -54,6 +54,10 @@ class OfferController extends Controller
     public function checkMember(Request $request) {
         //need to use proper user/role ACL but for now do simple
 
+        $validatedEmail = $request->validate([
+            'orderEmail' => 'bail|required|email',
+        ], ['email' => 'Your email address must be in proper email address format: xxxx@xxxx.xxx']);
+
         $orderEmail = $request->input('orderEmail');
 
         $offerId = $request->input('offer_id');

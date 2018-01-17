@@ -36,13 +36,23 @@
 
     </div>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     @if( $offer->active_flag == 1)
     <form method="POST" action="/offer/checkmember">
         <div class="form-group">
             <input id="offer_id" name="offer_id" type="hidden" value="{{ $offer->id }}">
             {{ csrf_field() }}
             <label for="orderEmail">Email address</label>
-            <input type="email" class="form-control" id="orderEmail" name="orderEmail" placeholder="Email">
+            <input type="email" class="form-control" id="orderEmail" name="orderEmail" placeholder="Email" required>
         </div>
         <button type="submit" class="btn btn-primary">Order Online</button>
     </form>
