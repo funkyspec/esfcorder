@@ -7,3 +7,10 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+//app specific rules
+
+input[type="number"] {
+    width: 6rem;
+}

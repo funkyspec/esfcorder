@@ -29,21 +29,26 @@
 
     <div class="row">
 
+        <form method="POST" action="">
+
         @foreach ($dispcats as $dispcat)
         <div class="col-md-4">
         <h3>{{ $dispcat->name}}</h3>
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-            <p>{{ $producerprice->item->name }}
+            <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
                 @isset($producerprice->non_mbr_price)
                 &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                 @endisset
                 @isset($producerprice->notes)
                 - {{ $producerprice->notes }}
-            @endisset</p>
+            @endisset</label>
+            <input type="number" class="form-control" id="{{ $producerprice->id }}" min="0" value="0" step="1">
             @endforeach
         </div>
         @endforeach
+
+    </form>
 
     </div>
 
