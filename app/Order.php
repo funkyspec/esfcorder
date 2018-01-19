@@ -8,6 +8,13 @@ class Order extends Model
 {
     //
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['offer_id', 'email', 'name', 'phone', 'pickup_option', 'customernote', 'internalnote'];
+
     /* *
      * Get the user that owns the order.
 
@@ -18,7 +25,7 @@ class Order extends Model
      */
 
     /**
-     * Get the fulfillment status for the order.
+     * Get the fulfillment status for the order. May need to delete
      */
     public function fulfillment()
     {

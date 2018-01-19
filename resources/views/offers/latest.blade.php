@@ -47,7 +47,7 @@
     @endif
 
     @if( $offer->active_flag == 1)
-    <form method="POST" action="/offer/checkmember">
+    <form method="POST" action="/offers/checkmember">
         <div class="form-group">
             <input id="offer_id" name="offer_id" type="hidden" value="{{ $offer->id }}">
             {{ csrf_field() }}

@@ -9,6 +9,14 @@ class LineItem extends Model
     //
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    //not sure if order_id should be fillable
+    protected $fillable = ['order_id', 'producerprice_id', 'quantity'];
+
+    /**
      * Get the order for this line item.
      */
     public function order()

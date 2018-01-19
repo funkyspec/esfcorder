@@ -44,10 +44,13 @@ class OfferController extends Controller
 
             $offer = Offer::orderBy('pickup_date', 'desc')->first();
 
+            return redirect("offers/$offer->id");
+            /*
             $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get();
             $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
             return view('offers.offer', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
+            */
         }
     }
 
@@ -62,17 +65,21 @@ class OfferController extends Controller
 
         $offerId = $request->input('offer_id');
 
-        $esfcEmail = User::where('email', $orderEmail)->where('role_id', '<=', 3)->first();
+        $esfcMbr = User::where('email', $orderEmail)->where('role_id', '<=', 3)->first();
 
-        if($esfcEmail) {
+        if($esfcMbr) {
             //set member status to member
             $mbr = 1;
+            session(['customername' => $esfcMbr->name]);
         } else {
             //set member status to non
             $mbr = 0;
         }
 
-        return redirect("order/create/$offerId/$orderEmail/$mbr");
+        session(['orderemail' => $orderEmail]);
+        session(['mbr' => $mbr]);
+
+        return redirect("orders/create/$offerId");
 
     }
 

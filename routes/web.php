@@ -23,13 +23,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/offer/latestoffer', 'OfferController@latest');
-Route::post('/offer/checkmember', 'OfferController@checkMember');
+Route::get('/offers/latestoffer', 'OfferController@latest');
+Route::post('/offers/checkmember', 'OfferController@checkMember');
 Route::resource('offers', 'OfferController');
 
 //Route::get('/offer/{id}', 'OfferController@available');
 
 
-Route::get('/order/create/{offer_id}/{orderemail}/{mbr}', 'OrderController@create');
-Route::post('/order/startorder', 'OrderController@startOrder');
+Route::get('/orders/create/{offer_id}', 'OrderController@create');
 Route::resource('orders', 'OrderController');

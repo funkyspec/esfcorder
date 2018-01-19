@@ -6,6 +6,7 @@ use App\Order;
 use App\Offer;
 use App\ProducerPrice;
 use App\DisplayCategory;
+use App\LineItem;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -38,15 +39,20 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($offer_id, $orderemail, $mbr)
+    public function create($offer_id)
     {
         //
         $offer = Offer::findOrFail($offer_id);
 
-        $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get();
-        $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
+        if($offer->active_flag == 1) {
+            $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get();
+            $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
-        return view('orders.orderform', ['offer' => $offer, 'orderemail'=>$orderemail, 'mbr'=>$mbr, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
+            return view('orders.orderform', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
+        } else {
+            return redirect("offers/$offer_id");
+
+        }
     }
 
     /**
@@ -58,6 +64,25 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        //create new order record
+        //create related line item records
+
+       $neworder = Order::create(['offer_id'=>request('offer_id'), 'email'=>request('order_email'), 'name'=>request('customer_name'), 'phone'=>request('phone'),  'pickup_option'=>request('pickup_option'), 'customernote'=>request('customer_note')]);
+
+       //do while there are non-0 request items
+       //dd($neworder->id);
+       foreach ($request->except(['_token', 'offer_id', 'order_email', 'customer_name', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
+           if($val > 0) {
+           LineItem::create(['order_id'=>$neworder->id, 'producerprice_id'=>$key, 'quantity' => $val]);
+           }
+       }
+
+       $lineItems = LineItem::where('order_id', $neworder->id)->get();
+
+
+       return view('orders.confirm', ['order' => $neworder, 'lineItems'=> $lineItems]);
     }
 
     /**
