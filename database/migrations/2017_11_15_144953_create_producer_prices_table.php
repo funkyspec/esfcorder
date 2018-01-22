@@ -33,6 +33,6 @@ class CreateProducerPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_weekly_prices');
+        Schema::dropIfExists('producer_prices');
     }
 }

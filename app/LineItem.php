@@ -31,6 +31,8 @@ class LineItem extends Model
      */
     public function producerPrice()
     {
-        return $this->belongsTo('App\ProducerPrice');
+        return $this->belongsTo('App\ProducerPrice', 'producerprice_id');
     }
+
+
 }

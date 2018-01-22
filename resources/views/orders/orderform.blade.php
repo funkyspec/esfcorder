@@ -40,8 +40,8 @@
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
             <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
-                @isset($producerprice->non_mbr_price)
-                &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                @isset($producerprice->mbr_price)
+                &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                 @endisset
                 @isset($producerprice->notes)
                 - {{ $producerprice->notes }}
@@ -62,8 +62,8 @@
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
             <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
-                @isset($producerprice->mbr_price)
-                &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                @isset($producerprice->non_mbr_price)
+                &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                 @endisset
                 @isset($producerprice->notes)
                 - {{ $producerprice->notes }}

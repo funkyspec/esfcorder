@@ -19,14 +19,21 @@
 
     @isset($order->phone)<p><strong>Contact phone:</strong> {{ $order->phone }}</p> @endisset
 
-    <h5>Your order items:</h5>
+    <h5>Your order items and quantities:</h5>
+    <ul>
     @foreach($lineItems as $lineItem)
 
-    <!-- need to access distant relationship to show item name -->
+        <!-- need to access distant relationship to show item name -->
 
-    <p>Producer price id {{ $lineItem->producerprice_id }}: {{ $lineItem->quantity }}
+        <li>@if( $lineItem->producerPrice->item->name)
+            {{ $lineItem->producerPrice->item->name }} ({{ $lineItem->producerPrice->sellUnit->name }}):
+        @else
+            Unspecified name:
+        @endif
+            <strong>{{ number_format($lineItem->quantity, 0) }}</strong></li>
 
     @endforeach
+    </ul>
 
     <p><strong>Pickup/delivery option:</strong> {{ $order->pickup_option }}</p>
 

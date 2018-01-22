@@ -79,7 +79,7 @@ class OrderController extends Controller
            }
        }
 
-       $lineItems = LineItem::where('order_id', $neworder->id)->get();
+       $lineItems = LineItem::where('order_id', $neworder->id)->with('producerPrice.item')->get();
 
 
        return view('orders.confirm', ['order' => $neworder, 'lineItems'=> $lineItems]);
