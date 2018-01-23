@@ -20,27 +20,46 @@
     @isset($order->phone)<p><strong>Contact phone:</strong> {{ $order->phone }}</p> @endisset
 
     <h5>Your order items and quantities:</h5>
-    <ul>
+    <table>
     @foreach($lineItems as $lineItem)
 
         <!-- need to access distant relationship to show item name -->
 
-        <li>@if( $lineItem->producerPrice->item->name)
-            {{ $lineItem->producerPrice->item->name }} ({{ $lineItem->producerPrice->sellUnit->name }}):
-        @else
-            Unspecified name:
-        @endif
-            <strong>{{ number_format($lineItem->quantity, 0) }}</strong></li>
+        <tr><td>@if( $lineItem->producerPrice->item->name)
+                {{ $lineItem->producerPrice->item->name }}
+                        @if(session('mbr') == 1)
+                            @isset($lineItem->producerPrice->mbr_price)
+                            (${{ $lineItem->producerPrice->mbr_price }}
+                            @endisset
+                        @else
+                            @isset($lineItem->producerPrice->non_mbr_price)
+                            (${{ $lineItem->producerPrice->non_mbr_price }}
+                            @endisset
+                        @endif
+                @isset($lineItem->producerPrice->sellUnit)/{{ $lineItem->producerPrice->sellUnit->name }})
+                @endisset
+                :
+            @else
+                Unspecified name:
+            @endif</td>
+            <td><strong>{{ number_format($lineItem->quantity, 0) }}</strong></td></tr>
 
     @endforeach
-    </ul>
+        </table>
+    <h5>Estimated price:  ${{ number_format($orderTotal, 2) }}</h5>
+
+    <!-- note on any items for which there is no price -->
+
+    <!-- note that price subject to change based on availability of produce - we will let you know of the final price in a follow-up email -->
 
     <p><strong>Pickup/delivery option:</strong> {{ $order->pickup_option }}</p>
 
+    @isset($order->customernote)
+    <br>
+    <h5>Your notes:</h5>
+    <p>{{ $order->customernote }}<p>
+    @endisset
 
-    <!-- pickup/delivery option -->
-
-    <!-- if comments / show here -->
 
     <!-- confirm button - sends to final thanks page -->
 

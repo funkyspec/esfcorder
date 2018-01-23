@@ -81,8 +81,27 @@ class OrderController extends Controller
 
        $lineItems = LineItem::where('order_id', $neworder->id)->with('producerPrice.item')->get();
 
+       $orderTotal = 0;
+       foreach($lineItems as $lineItem) {
+           if( session('mbr') == 1) {
+               if (isset($lineItem->producerPrice->mbr_price)) {
+                $lineprice = $lineItem->producerPrice->mbr_price * $lineItem->quantity;
+               } else {
+                $lineprice = 0;
+               }
+           } else {
+            if (isset($lineItem->producerPrice->non_mbr_price)) {
+                $lineprice = $lineItem->producerPrice->non_mbr_price * $lineItem->quantity;
+               } else {
+                $lineprice = 0;
+               }
+           }
 
-       return view('orders.confirm', ['order' => $neworder, 'lineItems'=> $lineItems]);
+           $orderTotal += $lineprice;
+       }
+
+
+       return view('orders.confirm', ['order' => $neworder, 'lineItems'=> $lineItems, 'orderTotal' => $orderTotal]);
     }
 
     /**
