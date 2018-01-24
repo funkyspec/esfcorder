@@ -104,6 +104,27 @@ class OrderController extends Controller
        return view('orders.confirm', ['order' => $neworder, 'lineItems'=> $lineItems, 'orderTotal' => $orderTotal]);
     }
 
+     /**
+     * Confirm a recently created order
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function confirm()
+    {
+        $email = session('orderemail');
+        //check if session order email set
+        if($email != null) {
+            $order = Order::find(request('order_id'));
+            $order->order_status = 'Confirmed';
+            $order->save();
+            return view('orders.thanks');
+        } else {
+            return view('welcome');
+        }
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -124,6 +145,15 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         //
+        $email = session('orderemail');
+        //check if session order email set
+        if($email != null) {
+            $offer = Offer::findOrFail($order->offer_id);
+            $lineItems = LineItem::where('order_id', $order->id);
+            return view('orders.editorder', ['order'=>$order, 'offer'=>$offer, 'lineItems'=>$lineItems]);
+        } else {
+            //return latest offer?? or home page
+        }
     }
 
     /**
