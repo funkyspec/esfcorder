@@ -13,7 +13,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['offer_id', 'email', 'name', 'phone', 'pickup_option', 'customernote', 'internalnote'];
+    protected $fillable = ['offer_id', 'email', 'mbr_status', 'name', 'phone', 'pickup_option', 'customernote', 'internalnote'];
 
     /* *
      * Get the user that owns the order.

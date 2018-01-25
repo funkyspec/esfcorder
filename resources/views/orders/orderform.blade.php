@@ -19,6 +19,7 @@
         @endif
 
         <h4>Order for {{ session('orderemail') }} @if( session('mbr') == 1)(Co-op member) @endif</h4>
+        <p><em>Not your email address above? Click your browser's back button and re-enter your email address.</em></p>
 
     </div>
 

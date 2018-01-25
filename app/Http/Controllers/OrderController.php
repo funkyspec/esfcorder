@@ -69,7 +69,9 @@ class OrderController extends Controller
         //create new order record
         //create related line item records
 
-       $neworder = Order::create(['offer_id'=>request('offer_id'), 'email'=>request('order_email'), 'name'=>request('customer_name'), 'phone'=>request('phone'),  'pickup_option'=>request('pickup_option'), 'customernote'=>request('customer_note')]);
+
+
+       $neworder = Order::create(['offer_id'=>request('offer_id'), 'email'=>request('order_email'), 'mbr_status'=>session('mbr'), 'name'=>request('customer_name'), 'phone'=>request('phone'),  'pickup_option'=>request('pickup_option'), 'customernote'=>request('customer_note')]);
 
        //do while there are non-0 request items
        //dd($neworder->id);
@@ -149,8 +151,11 @@ class OrderController extends Controller
         //check if session order email set
         if($email != null) {
             $offer = Offer::findOrFail($order->offer_id);
-            $lineItems = LineItem::where('order_id', $order->id);
-            return view('orders.editorder', ['order'=>$order, 'offer'=>$offer, 'lineItems'=>$lineItems]);
+            $lineItems = LineItem::where('order_id', $order->id)->get();
+            $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get();
+            $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
+
+            return view('orders.editorder', ['order'=>$order, 'offer'=>$offer, 'lineItems'=>$lineItems,'producerprices' => $producerprices, 'dispcats' => $dispcats]);
         } else {
             //return latest offer?? or home page
         }
@@ -165,7 +170,36 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        //retrieve lineItems for this order
+        //change lineItems quantities if different (consider deleting 0 quant lineItems)
+        //add new lineItems to order
+        // return confirmation page view
+        $lineItems = LineItem::where('order_id', $order->id)->get();
+
+        //case for member
+
+        foreach ($request->except(['_token', 'offer_id', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
+            //check to see if lineitem exists for this key
+            //if yes, update line item, if no create
+            if($val > 0) {
+                //update line item
+
+            } else {
+                LineItem::create(['order_id'=>$neworder->id, 'producerprice_id'=>$key, 'quantity' => $val]);
+            }
+        }
+
+
+
+
+        //case for non-member
+
+        foreach ($request->except(['_token', 'offer_id', 'order_email', 'customer_name', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
+            if($val > 0) {
+            LineItem::create(['order_id'=>$neworder->id, 'producerprice_id'=>$key, 'quantity' => $val]);
+            }
+        }
+
     }
 
     /**
