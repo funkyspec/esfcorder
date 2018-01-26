@@ -3,13 +3,6 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <h2>Edit Order Form - This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
@@ -31,7 +24,7 @@
 
     @if( session('mbr') == 1)
         @foreach ($dispcats as $dispcat)
-            <div class="col-md-4">
+            <div class="col-md-3">
             <h3>{{ $dispcat->name}}</h3>
             <p><em>{{ $dispcat->notes }}</em></p>
                 @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
@@ -61,31 +54,31 @@
     @else
 
         @foreach ($dispcats as $dispcat)
-                <div class="col-md-4">
-                <h3>{{ $dispcat->name}}</h3>
-                <p><em>{{ $dispcat->notes }}</em></p>
-                    @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-                        <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
-                        @isset($producerprice->non_mbr_price)
-                        &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
-                        @endisset
-                        @isset($producerprice->notes)
-                        - {{ $producerprice->notes }}
-                        @endisset</label>
+        <div class="col-md-3">
+        <h3>{{ $dispcat->name}}</h3>
+        <p><em>{{ $dispcat->notes }}</em></p>
+            @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
+                <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
+                @isset($producerprice->non_mbr_price)
+                &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                @endisset
+                @isset($producerprice->notes)
+                - {{ $producerprice->notes }}
+                @endisset</label>
 
-                        @if($lineItems->contains('producerprice_id', $producerprice->id))
-                            <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="{{ $lineItems->where('producerprice_id', $producerprice->id)->first()->quantity }}">
-                        @else
-                            <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="0">
-                        @endif
-
-
-
-                    @endforeach
-                </div>
+                @if($lineItems->contains('producerprice_id', $producerprice->id))
+                    <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="{{ $lineItems->where('producerprice_id', $producerprice->id)->first()->quantity }}">
+                @else
+                    <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="0">
+                @endif
 
 
-                @endforeach
+
+            @endforeach
+        </div>
+
+
+        @endforeach
             </div>
 
             <!-- only allow different email and name for non-members form fields here -->
@@ -100,7 +93,7 @@
                     <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ $order->name }}">
             </div>
 
-        @endif
+    @endif
 
 
         <div class="form-group form-row">
@@ -135,14 +128,24 @@
 
         <div class="form-group form-row">
             <label for="customer_note">Delivery address, special instructions, or other comments:</label>
-            <textarea id="customer_note" class="form-control" name="customer_note" value="{{ $order->customer_note }}"></textarea>
+            <textarea id="customer_note" class="form-control" name="customer_note">{{ $order->customernote }}</textarea>
         </div>
+
+
+        <button type="submit" class="btn btn-primary">Update Order</button>
 
     </form>
 
 
 
+<div class="row" id="confirm-cancel">
+    <p>Or you can cancel your order entirely:</p>
+    <div class="col-sm-2">
+            <a class="btn btn-danger" href="/orders/cancel/{{ $order->id }}" role="button">Cancel Order</a>
+    </div>
+
 </div>
 
+</div>
 
 @endsection

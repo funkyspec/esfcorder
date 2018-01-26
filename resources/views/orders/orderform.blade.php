@@ -3,13 +3,6 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         @if( $offer->active_flag == 1)
@@ -20,6 +13,8 @@
 
         <h4>Order for {{ session('orderemail') }} @if( session('mbr') == 1)(Co-op member) @endif</h4>
         <p><em>Not your email address above? Click your browser's back button and re-enter your email address.</em></p>
+
+        <p><strong>Select your quantities below, choose your pickup option at the bottom of the page, and then click Place Order.</strong></p>
 
     </div>
 
@@ -36,7 +31,7 @@
     @if( session('mbr') == 1)
 
         @foreach ($dispcats as $dispcat)
-        <div class="col-md-4">
+        <div class="col-md-3">
         <h3>{{ $dispcat->name}}</h3>
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
@@ -81,38 +76,40 @@
         </div>
     @endif
 
-    <div class="form-group form-row">
-        <p>Please choose a pickup/delivery option (required):</p>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin">
-            <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin</label>
+    <div class="form-row">
+        <div class="form-group">
+            <p><strong>Please choose a pickup/delivery option (required):</strong></p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin">
+                <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville">
+                <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery">
+                <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below.)</label>
+            </div>
         </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville">
-            <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville</label>
+        <!-- add phone number input text and special instructions, comments, address textarea -->
+
+        <div class="form-group">
+            <label for="phone">Phone (optional):</label>
+            <input type="text" class="form-control" id="phone" name="phone">
         </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery">
-            <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below.)</label>
+        <div class="form-group form-row">
+            <label for="customer_note">Delivery address (required for delivery option) or other comments (optional):</label>
+            <textarea id="customer_note" class="form-control" name="customer_note"></textarea>
+
         </div>
     </div>
 
-    <!-- add phone number input text and special instructions, comments, address textarea -->
-
-    <div class="form-group form-row">
-        <label for="phone">Phone (optional):</label>
-        <input type="text" class="form-control" id="phone" name="phone">
-    </div>
-
-    <div class="form-group form-row">
-        <label for="customer_note">Delivery address, special instructions, or other comments:</label>
-        <textarea id="customer_note" class="form-control" name="customer_note"></textarea>
-
-    </div>
-
-    <button class="btn btn-primary" type="submit">Place Order</button>
+    <button id="btn-plc-order" class="btn btn-primary" type="submit">Place Order</button>
 
 <!-- pickup options - radio buttons here -->
 <!-- ask for name, pickup method, and special instructions/notes -->

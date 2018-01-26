@@ -7,6 +7,7 @@ use App\Offer;
 use App\ProducerPrice;
 use App\DisplayCategory;
 use App\LineItem;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -171,35 +172,136 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         //retrieve lineItems for this order
-        //change lineItems quantities if different (consider deleting 0 quant lineItems)
-        //add new lineItems to order
-        // return confirmation page view
         $lineItems = LineItem::where('order_id', $order->id)->get();
 
         //case for member
 
-        foreach ($request->except(['_token', 'offer_id', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
-            //check to see if lineitem exists for this key
-            //if yes, update line item, if no create
-            if($val > 0) {
-                //update line item
+        if ( session('mbr') == 1) {
 
-            } else {
-                LineItem::create(['order_id'=>$neworder->id, 'producerprice_id'=>$key, 'quantity' => $val]);
+            $order->phone = $request->input('phone');
+            $order->pickup_option = $request->input('pickup_option');
+            $order->customernote = $request->input('customer_note');
+            $order->save();
+
+            foreach ($request->except(['_token', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
+
+                //check to see if lineitem exists for this key
+                $lineItem = $lineItems->where('producerprice_id', $key)->first();
+                //if yes, update line item to new val or delete, if no create
+                if ($lineItem != null) {
+                    if($val > 0){
+                        $lineItem->quantity = $val;
+                        $lineItem->save();
+                    } else {
+                        $lineItem->delete();
+                    }
+                } else {
+                    if($val > 0) {
+                    LineItem::create(['order_id'=>$order->id, 'producerprice_id'=>$key, 'quantity' => $val]);
+                    }
+                }
             }
+
+        } else {
+
+            //case for non-member
+
+            //need to handle email case: validation and reset session variables
+
+            $validatedEmail = $request->validate([
+                'email' => 'bail|required|email',
+            ], ['email' => 'Your email address must be in proper email address format: xxxx@xxxx.xxx']);
+
+            if ( $order->email != $request->input('email')) {
+                $orderEmail = $request->input('email');
+                $esfcMbr = User::where('email', $orderEmail)->where('role_id', '<=', 3)->first();
+
+                if($esfcMbr) {
+                    //set member status to member
+                    $mbr = 1;
+                    session(['customername' => $esfcMbr->name]);
+                } else {
+                    //set member status to non
+                    $mbr = 0;
+                }
+
+                session(['orderemail' => $orderEmail]);
+                session(['mbr' => $mbr]);
+                $order->email = $orderEmail;
+                $order->save();
+            }
+
+            $order->name = $request->input('customer_name');
+            $order->phone = $request->input('phone');
+            $order->pickup_option = $request->input('pickup_option');
+            $order->customernote = $request->input('customer_note');
+            $order->save();
+
+            foreach ($request->except(['_token', 'order_email', 'customer_name', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
+                //check to see if lineitem exists for this key
+                $lineItem = $lineItems->where('producerprice_id', $key)->first();
+                //if yes, update or delete line item, if no create
+                if ($lineItem  != null) {
+                    if($val > 0){
+                        $lineItem->quantity = $val;
+                        $lineItem->save();
+                    } else {
+                        $lineItem->delete();
+                    }
+                } else {
+                    if($val > 0) {
+                    LineItem::create(['order_id'=>$order->id, 'producerprice_id'=>$key, 'quantity' => $val]);
+                    }
+                }
+            }
+
         }
 
+        //retrieve updated lineItems, calculate order total, return confirmation page view
 
+        $newLineItems = LineItem::where('order_id', $order->id)->with('producerPrice.item')->get();
 
+       $orderTotal = 0;
+       foreach($newLineItems as $newLineItem) {
+           if( session('mbr') == 1) {
+               if (isset($newLineItem->producerPrice->mbr_price)) {
+                $lineprice = $newLineItem->producerPrice->mbr_price * $newLineItem->quantity;
+               } else {
+                $lineprice = 0;
+               }
+           } else {
+            if (isset($newLineItem->producerPrice->non_mbr_price)) {
+                $lineprice = $newLineItem->producerPrice->non_mbr_price * $newLineItem->quantity;
+               } else {
+                $lineprice = 0;
+               }
+           }
 
-        //case for non-member
+           $orderTotal += $lineprice;
+       }
 
-        foreach ($request->except(['_token', 'offer_id', 'order_email', 'customer_name', 'phone', 'pickup_option', 'customer_note']) as $key => $val) {
-            if($val > 0) {
-            LineItem::create(['order_id'=>$neworder->id, 'producerprice_id'=>$key, 'quantity' => $val]);
-            }
+       return view('orders.confirm', ['order' => $order, 'lineItems'=> $newLineItems, 'orderTotal' => $orderTotal]);
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id)
+    {
+        //
+        $order = Order::findOrFail($id);
+
+        if (session('orderemail') == $order->email) {
+            $order->order_status = 'Cancelled';
+            $order->save();
+            return view('orders.cancelled');
+        } else {
+            //handle error case
         }
-
     }
 
     /**

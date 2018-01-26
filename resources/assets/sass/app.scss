@@ -11,6 +11,37 @@
 
 //app specific rules
 
+.form-row {
+    margin-top: 2rem;
+}
+
 input[type="number"] {
     width: 6rem;
+    margin-bottom: 1.5rem;
+}
+
+input[type="email"], input#phone {
+    width: 30rem;
+}
+
+textarea#customer_note {
+    width: 50rem;
+}
+
+button#btn-plc-order {
+    margin-bottom: 5rem;
+}
+
+div#confirm-cancel {
+    margin-top: 6rem;
+    margin-bottom: 5rem;
+}
+
+table#order-items {
+    width: 100%;
+}
+@media (min-width: 500px) {
+    table#order-items {
+        width: 50%;
+    }
 }

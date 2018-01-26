@@ -31,5 +31,6 @@ Route::resource('offers', 'OfferController');
 
 
 Route::get('/orders/create/{offer_id}', 'OrderController@create');
+Route::get('/orders/cancel/{id}', 'OrderController@cancel');
 Route::post('/orders/confirm', 'OrderController@confirm');
 Route::resource('orders', 'OrderController');
