@@ -46,7 +46,12 @@ class OrderController extends Controller
         $offer = Offer::findOrFail($offer_id);
 
         if($offer->active_flag == 1) {
-            $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get();
+            $producerprices = ProducerPrice::where('offer_id', $offer->id)->join('items', 'items.id', '=', 'producer_prices.item_id')
+            ->orderBy('items.name')
+            ->get();
+
+            /* $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get(); */
+
             $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
             return view('orders.orderform', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
@@ -153,7 +158,13 @@ class OrderController extends Controller
         if($email != null) {
             $offer = Offer::findOrFail($order->offer_id);
             $lineItems = LineItem::where('order_id', $order->id)->get();
-            $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get();
+
+            $producerprices = ProducerPrice::where('offer_id', $offer->id)->join('items', 'items.id', '=', 'producer_prices.item_id')
+            ->orderBy('items.name')
+            ->get();
+
+            /* $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get(); */
+
             $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
             return view('orders.editorder', ['order'=>$order, 'offer'=>$offer, 'lineItems'=>$lineItems,'producerprices' => $producerprices, 'dispcats' => $dispcats]);

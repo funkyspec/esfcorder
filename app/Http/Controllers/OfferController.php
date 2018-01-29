@@ -35,7 +35,14 @@ class OfferController extends Controller
 
         if (!empty($offer)) {
 
-            $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get();
+            $producerprices = ProducerPrice::where('offer_id', $offer->id)->join('items', 'items.id', '=', 'producer_prices.item_id')
+            ->orderBy('items.name')
+            ->get();
+
+            /* $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item'=> function ($q) {
+                $q->orderBy('name');
+              }])->get(); */
+
             $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
             return view('offers.latest', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats, 'wrongEmail' => 0]);

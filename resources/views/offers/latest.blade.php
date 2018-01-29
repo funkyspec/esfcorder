@@ -17,7 +17,6 @@
         <p>To get started with online ordering, please enter your email address below. <strong>Co-op members, please use the email address to which we send weekly newsletters.</strong></p>
 
 
-
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
