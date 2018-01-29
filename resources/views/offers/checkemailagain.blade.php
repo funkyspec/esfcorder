@@ -22,7 +22,7 @@
         @endif
 
 
-        <form method="POST" action="/offers/checkmember">
+        <form method="POST" action="/offers/checkmemberagain">
             <div class="form-group">
                 <input id="offer_id" name="offer_id" type="hidden" value="{{ $offerId }}">
                 {{ csrf_field() }}

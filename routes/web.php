@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/offers/latestoffer', 'OfferController@latest');
+Route::get('/offers/latestoffer', 'OfferController@latest')->name('latest');
 Route::post('/offers/checkmember', 'OfferController@checkMember');
 Route::resource('offers', 'OfferController');
 

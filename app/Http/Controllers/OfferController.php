@@ -38,7 +38,7 @@ class OfferController extends Controller
             $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get();
             $dispcats = DisplayCategory::whereIn('id', $producerprices->pluck('display_category_id'))->get();
 
-            return view('offers.latest', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats]);
+            return view('offers.latest', ['offer' => $offer, 'producerprices' => $producerprices, 'dispcats' => $dispcats, 'wrongEmail' => 0]);
 
         } else {
 
@@ -78,7 +78,9 @@ class OfferController extends Controller
         } else {
             //set member status to non
             $mbr = 0;
-            return view("offers.checkemailagain", ['offerId' => $offerId, 'entemail'=>$orderEmail]);
+            /* return view("offers.checkemailagain", ['offerId' => $offerId, 'entemail'=>$orderEmail]); */
+
+            return redirect()->back()->withInput();
         }
 
         /* session(['orderemail' => $orderEmail]);

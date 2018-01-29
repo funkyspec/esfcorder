@@ -16,6 +16,8 @@
 
         <p>To get started with online ordering, please enter your email address below. <strong>Co-op members, please use the email address to which we send weekly newsletters.</strong></p>
 
+
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -23,6 +25,10 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
+        </div>
+        @elseif(old('orderEmail'))
+        <div class="alert alert-danger">
+                <p>We couldn't find this email: <strong>{{ old('orderEmail') }}</strong> in our co-op member database. Please enter the email address to which we send weekly newsletters. Online ordering is for co-op members only.</p>
         </div>
         @endif
 
