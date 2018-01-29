@@ -6,12 +6,15 @@
 
     <div class="row">
         @if( $offer->active_flag == 1)
-        <h2>Order Form - This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
+        <h2>Order Form - This week's availability (Pickup starting: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
         @else
         <h2>Availability for week of {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
         @endif
 
-        <h4>Order for {{ session('orderemail') }} @if( session('mbr') == 1)(Co-op member) @endif</h4>
+        <h4>Order for {{ session('orderemail') }}
+            @if( session('mbr') == 1 && session('customername') != null)
+             ( {{ session('customername') }} - Co-op member)
+            @elseif( session('mbr') == 1 ) (Co-op member) @endif</h4>
         <p><em>Not your email address above? Click your browser's back button and re-enter your email address.</em></p>
 
         <p><strong>Select your quantities below, choose your pickup option at the bottom of the page, and then click Place Order.</strong></p>
@@ -53,7 +56,7 @@
     @else
 
         @foreach ($dispcats as $dispcat)
-        <div class="col-md-4">
+        <div class="col-md-3">
         <h3>{{ $dispcat->name}}</h3>
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)

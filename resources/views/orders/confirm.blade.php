@@ -25,10 +25,16 @@
                                 @isset($lineItem->producerPrice->mbr_price)
                                 (${{ $lineItem->producerPrice->mbr_price }}
                                 @endisset
+                                @empty($lineItem->producerPrice->mbr_price)
+                                (price TBA)
+                                @endempty
                             @else
                                 @isset($lineItem->producerPrice->non_mbr_price)
                                 (${{ $lineItem->producerPrice->non_mbr_price }}
                                 @endisset
+                                @empty($lineItem->producerPrice->non_mbr_price)
+                                (price TBA)
+                                @endempty
                             @endif
                     @isset($lineItem->producerPrice->sellUnit)/{{ $lineItem->producerPrice->sellUnit->name }})
                     @endisset
@@ -40,7 +46,7 @@
 
         @endforeach
             </table>
-        <h5>Estimated price:  ${{ number_format($orderTotal, 2) }}</h5>
+        <h5>Estimated price:  ${{ number_format($orderTotal, 2) }} <em>(does not include delivery fee if applicable)</em></h5>
 
         <!-- note on any items for which there is no price -->
 
@@ -58,7 +64,7 @@
 
     <div class="row">
         <!-- confirm button - sends to final thanks page and enters confirmed flag into order page -->
-        <p>If it all looks good, please <strong>click Confirm below</strong>. If you need to make changes, please click Change Order.</p>
+        <p>If it all looks good, please <strong>click Confirm</strong>. If you need to make changes, please click Change Order.</p>
         <div class="col-sm-2">
             <form method="POST" action="/orders/confirm">
                 <input id="offer_id" name="order_id" type="hidden" value="{{ $order->id }}">

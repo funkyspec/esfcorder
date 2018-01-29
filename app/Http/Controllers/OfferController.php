@@ -71,15 +71,20 @@ class OfferController extends Controller
             //set member status to member
             $mbr = 1;
             session(['customername' => $esfcMbr->name]);
+            session(['orderemail' => $orderEmail]);
+            session(['mbr' => $mbr]);
+
+        return redirect("orders/create/$offerId");
         } else {
             //set member status to non
             $mbr = 0;
+            return view("offers.checkemailagain", ['offerId' => $offerId, 'entemail'=>$orderEmail]);
         }
 
-        session(['orderemail' => $orderEmail]);
+        /* session(['orderemail' => $orderEmail]);
         session(['mbr' => $mbr]);
 
-        return redirect("orders/create/$offerId");
+        return redirect("orders/create/$offerId"); */
 
     }
 

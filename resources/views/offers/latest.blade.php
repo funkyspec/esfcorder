@@ -9,9 +9,12 @@
 
         <h2>This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
 
-        <p>Pricing below is for the general public. Co-op members receive a discount to these listed prices. To start an online order, enter your email address below. (We use your email address to contact you regarding your order. We will not share it with anyone.) <strong>Co-op members, please use the email address to which we send weekly newsletters to receive your member discount.</strong></p>
+            <!--
+        <p>Pricing below is for the general public. Co-op members receive a discount to these listed prices. To start an online order, enter your email address below. (We use your email address to contact you regarding your order. We will not share it with anyone.) <strong>Co-op members, please use the email address to which we send weekly newsletters to receive your member discount.</strong></p> -->
 
-        <p>You do NOT pay for your order online. Please pay when you get your produce.</p>
+        <p>Pricing below is for co-op members. You still pay for your produce when you get it. We hope to be able to accept online payments in the near future.</p>
+
+        <p>To get started with online ordering, please enter your email address below. <strong>Co-op members, please use the email address to which we send weekly newsletters.</strong></p>
 
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -44,8 +47,8 @@
         <p><em>{{ $dispcat->notes }}</em></p>
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
             <p>{{ $producerprice->item->name }}
-                @isset($producerprice->non_mbr_price)
-                &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                @isset($producerprice->mbr_price)
+                &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                 @endisset
                 @isset($producerprice->notes)
                 - {{ $producerprice->notes }}
@@ -57,7 +60,7 @@
     </div>
 
 
-
+    <br /><br >
 </div>
 
 

@@ -20,3 +20,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+(function($) {
+    $(function() { // DOM Ready
+
+$('.emmyadd').html("easternshorefoodcooperative@gmail.com");
+
+  });
+})(jQuery);
