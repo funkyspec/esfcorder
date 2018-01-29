@@ -7,7 +7,7 @@
 
     <div class="row">
 
-        <h2>This week's availability (Pickup: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
+        <h2>This week's availability (Pickup starting: {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }})</h2>
 
             <!--
         <p>Pricing below is for the general public. Co-op members receive a discount to these listed prices. To start an online order, enter your email address below. (We use your email address to contact you regarding your order. We will not share it with anyone.) <strong>Co-op members, please use the email address to which we send weekly newsletters to receive your member discount.</strong></p> -->
