@@ -48,7 +48,7 @@ class OrderController extends Controller
         if($offer->active_flag == 1) {
             $producerprices = ProducerPrice::where('offer_id', $offer->id)->join('items', 'items.id', '=', 'producer_prices.item_id')
             ->orderBy('items.name')
-            ->get();
+            ->get(['producer_prices.*']);
 
             /* $producerprices = ProducerPrice::where('offer_id', $offer_id)->with(['item', 'sellUnit', 'producer'])->get(); */
 
@@ -161,7 +161,7 @@ class OrderController extends Controller
 
             $producerprices = ProducerPrice::where('offer_id', $offer->id)->join('items', 'items.id', '=', 'producer_prices.item_id')
             ->orderBy('items.name')
-            ->get();
+            ->get(['producer_prices.*']);
 
             /* $producerprices = ProducerPrice::where('offer_id', $offer->id)->with(['item', 'sellUnit', 'producer'])->get(); */
 
