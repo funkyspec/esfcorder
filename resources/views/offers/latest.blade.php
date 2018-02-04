@@ -12,7 +12,7 @@
             <!--
         <p>Pricing below is for the general public. Co-op members receive a discount to these listed prices. To start an online order, enter your email address below. (We use your email address to contact you regarding your order. We will not share it with anyone.) <strong>Co-op members, please use the email address to which we send weekly newsletters to receive your member discount.</strong></p> -->
 
-        <p>Pricing below is for co-op members. You still pay for your produce when you get it. We hope to be able to accept online payments in the near future.</p>
+        <p>Pricing below is for co-op members. This form is for placing orders only. We cannot accept payments online at this time but hope to be able to do so in the near future.</p>
 
         <p>To get started with online ordering, please enter your email address below. <strong>Co-op members, please use the email address to which we send weekly newsletters.</strong></p>
 

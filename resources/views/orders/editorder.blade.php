@@ -101,19 +101,19 @@
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin"
                 @if($order->pickup_option == 'Berlin')checked @endif>
-                <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin</label>
+                <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (We will get in touch with you about making payment.)</label>
             </div>
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville"
                 @if($order->pickup_option == 'Whaleyville')checked @endif>
-                <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville</label>
+                <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville (Pay when you pick up)</label>
             </div>
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery"
                 @if($order->pickup_option == 'delivery')checked @endif>
-                <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below.)</label>
+                <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below. Pay upon delivery.)</label>
             </div>
         </div>
 
