@@ -66,18 +66,18 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <!--
-                <div class="top-right links">
-                        <a href="{{ url('/offers/latestoffer') }}">This Week's Availability (date here)</a>
 
-                </div>  -->
+                <div class="top-right links">
+                        <a href="{{ url('/offers/latestoffer') }}">View and Order This Week's Produce</a>
+
+                </div>
 
 
             <div class="content">
                 <div class="title m-b-md">
                     Welcome to ESFC Weekly Ordering
                 </div>
-                <p>We will have next week's availability (pickup starting Friday 2/9/18) posted Sunday 2/4/18.</p>
+              <!--  <p>We will have next week's availability (pickup starting Friday 2/9/18) posted Sunday 2/4/18.</p> -->
 
                 <!--
                 <div class="links">
