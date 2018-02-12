@@ -101,7 +101,7 @@
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin"
                 @if($order->pickup_option == 'Berlin')checked @endif>
-                <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring exact change for payment in sealed envelope.)</label>
+                <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
             </div>
 
             <div class="form-check">
