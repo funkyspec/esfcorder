@@ -44,25 +44,47 @@
         @endif
 
     </div>
+    <br />
+
+
+    @foreach ($dispcats as $dispcat)
+
     <div class="row">
 
-        @foreach ($dispcats as $dispcat)
-        <div class="col-md-3">
         <h3>{{ $dispcat->name}}</h3>
         <p><em>{{ $dispcat->notes }}</em></p>
-            @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-            <p>{{ $producerprice->item->name }}
-                @isset($producerprice->mbr_price)
-                &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
-                @endisset
-                @isset($producerprice->notes)
-                - {{ $producerprice->notes }}
-            @endisset</p>
-            @endforeach
-        </div>
+
+
+
+        @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
+
+            @if($loop->iteration % 4 == 1)
+                <div class="row">
+            @endif
+                    <div class="col-md-3">
+
+                        <p>{{ $producerprice->item->name }}
+                            @isset($producerprice->mbr_price)
+                            &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                            @endisset
+                            @isset($producerprice->notes)
+                            - {{ $producerprice->notes }}
+                            @endisset</p>
+
+                        </div>
+
+            @if($loop->iteration % 4 == 0 || $loop->last)
+                </div>
+            @endif
+
         @endforeach
 
+
     </div>
+
+    @endforeach
+
+
 
 
     <br /><br >

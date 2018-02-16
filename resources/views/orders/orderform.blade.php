@@ -30,53 +30,91 @@
         <input id="offer_id" name="offer_id" type="hidden" value="{{ $offer->id }}">
         <input id="order_email" name="order_email" type="hidden" value="{{ session('orderemail') }}">
 
-    <div class="row">
+
     @if( session('mbr') == 1)
 
         @foreach ($dispcats as $dispcat)
-        <div class="col-md-3">
-        <h3>{{ $dispcat->name}}</h3>
-        <p><em>{{ $dispcat->notes }}</em></p>
+
+        <div class="row form-horizontal">
+            <h3>{{ $dispcat->name}}</h3>
+            <p><em>{{ $dispcat->notes }}</em></p>
+
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-            <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
-                @isset($producerprice->mbr_price)
-                &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
-                @endisset
-                @isset($producerprice->notes)
-                - {{ $producerprice->notes }}
-            @endisset</label>
-            <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" value="0" step="1">
+
+            @if($loop->iteration % 4 == 1)
+                <div class="form-group">
+            @endif
+
+                    <div class="col-md-3">
+
+                        <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
+                            @isset($producerprice->mbr_price)
+                            &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                            @endisset
+                            @isset($producerprice->notes)
+                            - {{ $producerprice->notes }}
+                        @endisset</label>
+                        <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" value="0" step="1">
+
+                    </div>
+
+            @if($loop->iteration % 4 == 0 || $loop->last)
+                </div>
+            @endif
+
             @endforeach
+
+
         </div>
+
+        @endforeach
 
         <input id="customer_name" name="customer_name" type="hidden" value="{{  session('customername') }}">
-        @endforeach
-    </div>
-
     @else
 
+    <!-- need to change layout from 4-cols to 4-cols within section blocks -->
+
         @foreach ($dispcats as $dispcat)
-        <div class="col-md-3">
-        <h3>{{ $dispcat->name}}</h3>
-        <p><em>{{ $dispcat->notes }}</em></p>
+        <div class="row form-horizontal">
+            <h3>{{ $dispcat->name}}</h3>
+            <p><em>{{ $dispcat->notes }}</em></p>
+
             @foreach ( $producerprices->where('display_category_id', $dispcat->id) as $producerprice)
-            <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
-                @isset($producerprice->non_mbr_price)
-                &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
-                @endisset
-                @isset($producerprice->notes)
-                - {{ $producerprice->notes }}
-            @endisset</label>
-            <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" value="0" step="1">
+
+            @if($loop->iteration % 4 == 1)
+                <div class="form-group">
+            @endif
+
+                    <div class="col-md-3">
+
+                        <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
+                            @isset($producerprice->non_mbr_price)
+                            &nbsp;${{ $producerprice->non_mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
+                            @endisset
+                            @isset($producerprice->notes)
+                            - {{ $producerprice->notes }}
+                        @endisset</label>
+                        <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" value="0" step="1">
+
+                    </div>
+
+
+                    @if($loop->iteration % 4 == 0 || $loop->last)
+                </div>
+            @endif
+
             @endforeach
+
+
         </div>
+
         @endforeach
 
-    </div>
         <div class="form-group row">
-        <label for="customer_name">Your name:</label>
+            <label for="customer_name">Your name:</label>
             <input type="text" class="form-control" id="customer_name" name="customer_name">
         </div>
+
     @endif
 
     <div class="form-row">
