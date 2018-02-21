@@ -34,5 +34,9 @@ class LineItem extends Model
         return $this->belongsTo('App\ProducerPrice', 'producerprice_id');
     }
 
+    public function getMbrLinePriceAttribute() {
+        return number_format(($this->quantity * $this->producerPrice->mbr_price), 2);
+    }
+
 
 }

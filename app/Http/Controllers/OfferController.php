@@ -8,6 +8,7 @@ use App\Offer;
 use App\DisplayCategory;
 use App\ProducerPrice;
 use App\User;
+use App\Order;
 use App\Http\Controllers\Controller;
 
 class OfferController extends Controller
@@ -99,4 +100,18 @@ class OfferController extends Controller
 
     //need show method for displaying previous weeks' offers
     //use standard laravel resource/CRUD conventions
+
+    //show offer - display orders placed for this offer - if active display link to edit item availability
+
+    public function show($id) {
+        // get offer and orders for this offer
+
+        $offer = Offer::findOrFail($id);
+
+        $orders = Order::where('offer_id', $id)->with('lineItems.producerPrice.item')->get();
+
+        return view('offers.order', ['offer'=>$offer, 'orders'=>$orders]);
+
+
+    }
 }
