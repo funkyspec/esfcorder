@@ -67,9 +67,11 @@
                             @isset($producerprice->mbr_price)
                             &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                             @endisset
+                            <!--
                             @isset($producerprice->notes)
                             - {{ $producerprice->notes }}
-                            @endisset</p>
+                            @endisset
+                        --></p>
 
                         </div>
 
