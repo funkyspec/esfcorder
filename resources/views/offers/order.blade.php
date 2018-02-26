@@ -54,7 +54,9 @@
 
         @foreach($order->lineItems as $lineItem)
 
-        <p><strong>{{ round($lineItem->quantity) }}</strong> {{ $lineItem->producerPrice->item->name }} @ ${{ $lineItem->producerPrice->mbr_price }} = $ {{ $lineItem->mbr_line_price }}</p>
+        <p><strong>{{ round($lineItem->quantity) }}</strong>
+            {{ $lineItem->producerPrice->sellUnit->name }}
+            {{ $lineItem->producerPrice->item->name }} @ ${{ $lineItem->producerPrice->mbr_price }} = $ {{ $lineItem->mbr_line_price }}</p>
 
 
 
