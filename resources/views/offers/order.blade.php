@@ -56,7 +56,11 @@
 
         <p><strong>{{ round($lineItem->quantity) }}</strong>
             {{ $lineItem->producerPrice->sellUnit->name }}
-            {{ $lineItem->producerPrice->item->name }} @ ${{ $lineItem->producerPrice->mbr_price }} = $ {{ $lineItem->mbr_line_price }}</p>
+            {{ $lineItem->producerPrice->item->name }}
+            @isset($lineItem->producerPrice->producer->abbrev)
+             <em>({{ $lineItem->producerPrice->producer->abbrev }})</em>
+            @endisset
+             @ ${{ $lineItem->producerPrice->mbr_price }} = $ {{ $lineItem->mbr_line_price }}</p>
 
 
 

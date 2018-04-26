@@ -48,12 +48,17 @@
                     <div class="col-md-3">
 
                         <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
+                            @isset($producerprice->producer->abbrev)
+                             <em>({{ ($producerprice->producer->abbrev) }})</em>
+                            @endisset
+
                             @isset($producerprice->mbr_price)
                             &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                             @endisset
+
                             @isset($producerprice->notes)
                             - {{ $producerprice->notes }}
-                        @endisset</label>
+                        @endisset </label>
                         <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" value="0" step="1">
 
                     </div>
@@ -73,6 +78,7 @@
     @else
 
     <!-- need to change layout from 4-cols to 4-cols within section blocks -->
+    <!-- need to add producer->abbrev's to this section if we allow non-member ordering -->
 
         @foreach ($dispcats as $dispcat)
         <div class="row form-horizontal">

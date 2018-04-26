@@ -21,6 +21,11 @@
 
             <tr><td>@if( $lineItem->producerPrice->item->name)
                     {{ $lineItem->producerPrice->item->name }}
+
+                    @isset($lineItem->producerPrice->producer->abbrev)
+                    <em>{{ $lineItem->producerPrice->producer->abbrev }}</em>
+                    @endisset
+
                             @if(session('mbr') == 1)
                                 @isset($lineItem->producerPrice->mbr_price)
                                 (${{ $lineItem->producerPrice->mbr_price }}

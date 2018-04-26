@@ -64,6 +64,9 @@
                     <div class="col-md-3">
 
                         <p>{{ $producerprice->item->name }}
+                            @isset($producerprice->producer->abbrev)
+                            &nbsp;<em>{{ ($producerprice->producer->abbrev) }}</em>
+                            @endisset
                             @isset($producerprice->mbr_price)
                             &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                             @endisset

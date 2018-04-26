@@ -38,6 +38,10 @@
                 <div class="col-md-3">
 
                     <label for="{{ $producerprice->id }}">{{ $producerprice->item->name }}
+
+                    @isset($producerprice->producer->abbrev)
+                    <em>({{ ($producerprice->producer->abbrev) }})</em>
+                    @endisset
                     @isset($producerprice->mbr_price)
                     &nbsp;${{ $producerprice->mbr_price }}/{{ is_null($producerprice->sellUnit)?'':$producerprice->sellUnit->name }}
                     @endisset
@@ -46,7 +50,7 @@
                     @endisset</label>
 
                     @if($lineItems->contains('producerprice_id', $producerprice->id))
-                        <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="{{ $lineItems->where('producerprice_id', $producerprice->id)->first()->quantity }}">
+                        <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="{{ number_format($lineItems->where('producerprice_id', $producerprice->id)->first()->quantity, 0) }}">
                     @else
                         <input type="number" class="form-control form-control-sm" name="{{ $producerprice->id }}" id="{{ $producerprice->id }}" min="0" step="1" value="0">
                     @endif
