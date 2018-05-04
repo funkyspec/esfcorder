@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/offers/latestoffer', 'OfferController@latest')->name('latest');
 Route::post('/offers/checkmember', 'OfferController@checkMember');
+Route::get('/offers/total/{id}', 'OfferController@producerTotal');
 Route::resource('offers', 'OfferController');
 
 //Route::get('/offer/{id}', 'OfferController@available');

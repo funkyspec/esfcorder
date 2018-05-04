@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Offer;
 use App\DisplayCategory;
+use App\LineItem;
 use App\ProducerPrice;
 use App\User;
 use App\Order;
@@ -62,7 +63,8 @@ class OfferController extends Controller
         }
     }
 
-    public function checkMember(Request $request) {
+    public function checkMember(Request $request)
+    {
         //need to use proper user/role ACL but for now do simple
 
         $validatedEmail = $request->validate([
@@ -103,7 +105,8 @@ class OfferController extends Controller
 
     //show offer - display orders placed for this offer - if active display link to edit item availability
 
-    public function show($id) {
+    public function show($id)
+    {
         // get offer and orders for this offer
 
         $offer = Offer::findOrFail($id);
@@ -112,6 +115,25 @@ class OfferController extends Controller
 
         return view('offers.order', ['offer'=>$offer, 'orders'=>$orders]);
 
+
+    }
+
+    public function producerTotal($id)
+    {
+        // show all items ordered for this offer, by producer
+
+        $offer = Offer::findOrFail($id);
+
+        $orders = Order::where('offer_id', $id)->get();
+
+        $orderIds = $orders->pluck('id');
+
+        $producerPrices = ProducerPrice::with('producer')->where('offer_id', $id)->get();
+
+        //$lineItems = LineItem::
+
+
+        return view('offers.producer', ['offer'=>$offer, 'orders'=>$orders, 'producerPrices' => $producerPrices]);
 
     }
 }

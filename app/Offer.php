@@ -25,6 +25,4 @@ class Offer extends Model
     }
 
 
-
-
 }

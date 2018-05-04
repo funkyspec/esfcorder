@@ -24,4 +24,12 @@ class Producer extends Model
     {
         return $this->belongsTo('App\State');
     }
+
+    /**
+     * Get all line items for an offer for this producer.
+     */
+    public function lineItems()
+    {
+        return $this->hasManyThrough('App\LineItem', 'App\ProducerPrice');
+    }
 }

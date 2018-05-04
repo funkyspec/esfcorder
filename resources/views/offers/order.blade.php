@@ -8,6 +8,8 @@
     <div class="row">
         <h2>Weekly orders for pickup day starting {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
 
+        <p><a href="/offers/total/{{ $offer->id }}">View vendor totals &raquo;</a></p>
+
     </div>
 
     @foreach($orders as $order)

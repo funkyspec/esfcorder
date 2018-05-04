@@ -54,7 +54,7 @@ class ProducerPrice extends Model
      */
     public function lineItems()
     {
-        return $this->hasMany('App\LineItem');
+        return $this->hasMany('App\LineItem', 'producerprice_id');
     }
 
 
