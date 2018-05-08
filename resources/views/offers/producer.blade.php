@@ -7,6 +7,7 @@
 
     <div class="row">
         <h2>Producer totals for pickup day starting {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
+        <p>(not including cancelled orders)</p>
 
         <p><a href="/offers/{{ $offer->id }}">View customer orders &raquo;</a></p>
 

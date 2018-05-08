@@ -124,7 +124,7 @@ class OfferController extends Controller
 
         $offer = Offer::findOrFail($id);
 
-        $orders = Order::where('offer_id', $id)->get();
+        $orders = Order::where('offer_id', $id)->where('order_status', '<>', 'Cancelled')->get();
 
         $orderIds = $orders->pluck('id');
 
