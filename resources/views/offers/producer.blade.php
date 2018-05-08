@@ -18,7 +18,9 @@
     <div class="row">
     <h4 style="text-decoration: underline;">{{ $producer->name }}</h4>
 
-        @foreach($producerPrices->where('producer_id', $producer->id) as $producerPrice)
+        @foreach($producerPrices->where('producer_id', $producer->id)->sortBy(function($producerPrice) {
+            return $producerPrice->item->name;
+       }) as $producerPrice)
 
             @if($producerPrice->lineItems->sum('quantity') > 0)
 

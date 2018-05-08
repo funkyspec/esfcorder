@@ -128,7 +128,7 @@ class OfferController extends Controller
 
         $orderIds = $orders->pluck('id');
 
-        $producerPrices = ProducerPrice::with('producer')->where('offer_id', $id)->get();
+        $producerPrices = ProducerPrice::with(['producer', 'item'])->where('offer_id', $id)->get();
 
         //$lineItems = LineItem::
 
