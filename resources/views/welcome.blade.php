@@ -77,7 +77,7 @@
                     Welcome to ESFC Weekly Ordering
                 </div>
 
-                <p>We will have next week's availability (pickup starting Friday 5/11/18) posted Sunday 5/6/18.</p>
+                <p>We will have next week's availability (pickup starting Friday 5/18/18) posted Sunday 5/13/18.</p>
 
                 <!--
                 <div class="links">
