@@ -75,6 +75,10 @@ class OrderController extends Controller
         //create new order record
         //create related line item records
 
+        $validatedPickup = $request->validate([
+            'pickup_option' => 'required'
+        ]);
+
 
 
        $neworder = Order::create(['offer_id'=>request('offer_id'), 'email'=>request('order_email'), 'mbr_status'=>session('mbr'), 'name'=>request('customer_name'), 'phone'=>request('phone'),  'pickup_option'=>request('pickup_option'), 'customernote'=>request('customer_note')]);

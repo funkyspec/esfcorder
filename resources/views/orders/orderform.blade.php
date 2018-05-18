@@ -25,6 +25,16 @@
 
     <!-- if branch - block to show member pricing and then block for non-member pricing -->
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="/orders">
         {{ csrf_field() }}
         <input id="offer_id" name="offer_id" type="hidden" value="{{ $offer->id }}">
@@ -123,24 +133,27 @@
 
     @endif
 
+
+
     <div class="form-row">
         <div class="form-group">
             <p><strong>Please choose a pickup/delivery option (required):</strong></p>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin">
+                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin" required>
                 <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville">
+                <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville" required>
                 <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville (Pay when you pick up)</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery">
+                <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery" required>
                 <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below. Pay upon delivery.)</label>
             </div>
         </div>
+
 
         <!-- add phone number input text and special instructions, comments, address textarea -->
 

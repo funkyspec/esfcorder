@@ -13,6 +13,16 @@
 
     </div>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 
     <form method="POST" action="/orders/{{ $order->id }}">
         {{ method_field('PUT') }}
@@ -131,19 +141,19 @@
         <div class="form-group form-row">
             <p>Please choose a pickup/delivery option (required):</p>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin"
+                <input class="form-check-input" type="radio" name="pickup_option" required id="p_berlin" value="Berlin"
                 @if($order->pickup_option == 'Berlin')checked @endif>
                 <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville"
+                <input class="form-check-input" type="radio" name="pickup_option" required id="p_whaleyville" value="Whaleyville"
                 @if($order->pickup_option == 'Whaleyville')checked @endif>
                 <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville (Pay when you pick up)</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery"
+                <input class="form-check-input" type="radio" name="pickup_option" required id="d_delivery" value="delivery"
                 @if($order->pickup_option == 'delivery')checked @endif>
                 <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below. Pay upon delivery.)</label>
             </div>
