@@ -13,6 +13,7 @@
     </div>
 
     @foreach($orders as $order)
+    <div style="page-break-before: auto;">
     <h4>Order #{{ $loop->iteration }}</h4>
         <div class="row">
             <div class="col-md-3 hidden-print">
@@ -72,9 +73,8 @@
 
         <p>Estimated order total: <strong>${{ number_format($order->lineItems->sum('mbr_line_price'), 2) }}</strong> <em>(weighed items actual weight and delivery charge may change this)</em></p>
 
-
-        <br /><br />
-
+    </div>
+    <br /><br />
     @endforeach
 
 @endsection
