@@ -5,7 +5,7 @@
 <div class="container">
 
 
-    <div class="row">
+    <div class="row hidden-print">
         <h2>Weekly orders for pickup day starting {{ \Carbon\Carbon::parse($offer->pickup_date)->format('l - M j, Y') }}</h2>
 
         <p><a href="/offers/total/{{ $offer->id }}">View vendor totals &raquo;</a></p>
@@ -15,7 +15,7 @@
     @foreach($orders as $order)
     <h4>Order #{{ $loop->iteration }}</h4>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-print">
                 Email: <strong>{{ $order-> email }}</strong>
                 @if (!empty($order->phone))
                 <br />Phone: {{ $order-> phone }}
@@ -42,7 +42,7 @@
                 Pickup Option: {{ $order->pickup_option }}
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-print">
                 Notes/comments:<br />
                 @if (!empty($order->name))
                 {{ $order->customernote }}
@@ -52,7 +52,7 @@
             </div>
 
         </div>
-        <p><strong>Items in this order:</strong>
+        <p class="hidden-print"><strong>Items in this order:</strong>
 
         @foreach($order->lineItems as $lineItem)
 
