@@ -138,20 +138,20 @@
     <div class="form-row">
         <div class="form-group">
             <p><strong>Please choose a pickup/delivery option (required):</strong></p>
-            <div class="form-check">
+          <!--  <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin" required>
                 <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
-            </div>
+            </div> -->
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville" required>
                 <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville (Pay when you pick up)</label>
             </div>
 
-            <div class="form-check">
+          <!--   <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="d_delivery" value="delivery" required>
                 <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below. Pay upon delivery.)</label>
-            </div>
+            </div> -->
         </div>
 
 
