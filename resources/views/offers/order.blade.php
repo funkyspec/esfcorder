@@ -13,7 +13,7 @@
     </div>
 
     @foreach($orders as $order)
-    <div style="page-break-before: auto;">
+    <div style="page-break-inside: avoid;">
     <h4>Order #{{ $loop->iteration }}</h4>
         <div class="row">
             <div class="col-md-3 hidden-print">
