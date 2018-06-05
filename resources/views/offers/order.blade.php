@@ -30,15 +30,17 @@
                 <em>Not given</em>
                 @endif
                 <br />
-                Order status:
-                @if (!empty($order->order_status))
-                {{ $order->order_status }}
-                @else
-                Unconfirmed
-                @endif
+                <span class="hidden-print">
+                    Order status:
+                    @if (!empty($order->order_status))
+                    {{ $order->order_status }}
+                    @else
+                    Unconfirmed
+                    @endif
+                </span>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-print">
                 Pickup Option: {{ $order->pickup_option }}
             </div>
 
