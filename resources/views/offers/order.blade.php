@@ -74,7 +74,7 @@
         <p>Estimated order total: <strong>${{ number_format($order->lineItems->sum('mbr_line_price'), 2) }}</strong> <em>(weighed items actual weight and delivery charge may change this)</em></p>
 
     </div>
-    <br /><br />
+    <br />
     @endforeach
 
 @endsection

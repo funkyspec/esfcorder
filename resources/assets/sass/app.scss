@@ -50,3 +50,12 @@ table#order-items {
 .email-us {
     margin-top: 1.5rem;
 }
+
+
+@media print {
+    div, p {
+        font-size: 1.75rem;
+
+
+    }
+}
