@@ -140,11 +140,11 @@
 
         <div class="form-group form-row">
             <p>Please choose a pickup/delivery option (required):</p>
-           <!-- <div class="form-check">
+            <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" required id="p_berlin" value="Berlin"
                 @if($order->pickup_option == 'Berlin')checked @endif>
                 <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
-            </div> -->
+            </div>
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" required id="p_whaleyville" value="Whaleyville"

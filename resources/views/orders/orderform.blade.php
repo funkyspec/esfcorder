@@ -138,10 +138,10 @@
     <div class="form-row">
         <div class="form-group">
             <p><strong>Please choose a pickup/delivery option (required):</strong></p>
-          <!--  <div class="form-check">
+            <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin" required>
                 <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
-            </div> -->
+            </div>
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_whaleyville" value="Whaleyville" required>
