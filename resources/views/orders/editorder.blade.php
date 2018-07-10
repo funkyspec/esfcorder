@@ -138,26 +138,20 @@
     @endif
 
 
-        <div class="form-group form-row">
-            <p>Please choose a pickup/delivery option (required):</p>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" required id="p_berlin" value="Berlin"
-                @if($order->pickup_option == 'Berlin')checked @endif>
-                <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" required id="p_whaleyville" value="Whaleyville"
-                @if($order->pickup_option == 'Whaleyville')checked @endif>
-                <label class="form-check-label" for="p_whaleyville">Pickup Sat/Sun in Whaleyville (Pay when you pick up)</label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" required id="d_delivery" value="delivery"
-                @if($order->pickup_option == 'delivery')checked @endif>
-                <label class="form-check-label" for="d_delivery">Delivery ($5 charge. Please enter delivery address below. Pay upon delivery.)</label>
-            </div>
+    <div class="form-group">
+        <p><strong>Please choose a pickup/delivery option (required):</strong></p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="pickup_option" id="p_bent" value="Bent Pine Rd" required>
+            <label class="form-check-label" for="p_berlin">Pickup Friday after 7pm at 6762 Bent Pine Rd., Willards, MD</label>
         </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="pickup_option" id="p_opfm" value="OPFM" required>
+            <label class="form-check-label" for="p_whaleyville">Pickup Saturday between 8a-1p at Ocean Pines Farmers Market</label>
+        </div>
+
+    </div>
+
 
 
 

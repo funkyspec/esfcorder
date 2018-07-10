@@ -16,7 +16,7 @@
 
         <p>To get started with online ordering, please enter your email address below. <strong>Co-op members, please use the email address to which we send weekly newsletters.</strong></p>
 
-        <p>Please place orders before <strong>Wednesday at 6pm</strong>. We cannot guarantee that orders placed after that time can be processed.</p>
+        <p>Please place orders before <strong>Thursday at 7pm</strong>. We cannot guarantee that orders placed after that time can be processed.</p>
 
 
         @if ($errors->any())
