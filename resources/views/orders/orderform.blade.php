@@ -139,7 +139,7 @@
         <!-- <div class="form-group">
             <p><strong>Please choose a pickup/delivery option (required):</strong></p>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="Berlin" required>
+                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="ACT Berlin" required>
                 <label class="form-check-label" for="p_berlin">Pickup Friday in Berlin (Bring payment in envelope - exact change or check to The Good Farm.)</label>
             </div>
 
@@ -156,15 +156,22 @@
 
         <div class="form-group">
             <p><strong>Please choose a pickup/delivery option (required):</strong></p>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="pickup_option" id="p_berlin" value="ACT Berlin" required>
+                <label class="form-check-label" for="p_berlin">Pickup Friday after 12 noon in Berlin at ACT (Bring payment in envelope - exact change or check to The Good Farm.)</label>
+            </div>
+
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_bent" value="Bent Pine Rd" required>
                 <label class="form-check-label" for="p_berlin">Pickup Friday after 7pm at 6762 Bent Pine Rd., Willards, MD</label>
             </div>
 
+                <!--
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="pickup_option" id="p_opfm" value="OPFM" required>
                 <label class="form-check-label" for="p_whaleyville">Pickup Saturday between 8a-1p at Ocean Pines Farmers Market</label>
-            </div>
+            </div> -->
 
         </div>
 
