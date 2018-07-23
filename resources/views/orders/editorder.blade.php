@@ -139,6 +139,10 @@
 
 
     <div class="form-group">
+
+            <p><strong>Please note: The only pickup option is Saturday Ocean Pines Farmers Market:</strong></p>
+
+        <!--
         <p><strong>Please choose a pickup/delivery option (required):</strong></p>
 
         <div class="form-check">
@@ -149,13 +153,13 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="pickup_option" id="p_bent" value="Bent Pine Rd" required>
             <label class="form-check-label" for="p_bent">Pickup Friday after 7pm at 6762 Bent Pine Rd., Willards, MD (Cash or check only at this time)</label>
-        </div>
+        </div>  -->
 
-            <!--
+
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="pickup_option" id="p_opfm" value="OPFM" required>
-            <label class="form-check-label" for="p_whaleyville">Pickup Saturday between 8a-1p at Ocean Pines Farmers Market</label>
-        </div> -->
+            <input class="form-check-input" type="radio" name="pickup_option" id="p_opfm" value="OPFM" required checked>
+            <label class="form-check-label" for="p_opfm">Pickup Saturday between 8a-1p at Ocean Pines Farmers Market</label>
+        </div>
 
     </div>
 
