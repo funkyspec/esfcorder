@@ -155,7 +155,7 @@
         </div> -->
 
         <div class="form-group">
-            <p><strong>Please note: The only pickup option is Saturday Ocean Pines Farmers Market:</strong></p>
+            <p><strong>Please note: The only pickup option is Saturday Ocean Pines Farmers Market.</strong></p>
 
             <!--
 
