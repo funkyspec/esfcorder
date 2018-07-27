@@ -67,8 +67,8 @@
     <body>
         <div class="flex-center position-ref full-height">
 
-                <div class="top-right links">
-               <a href="{{ url('/offers/latestoffer') }}">View and Order This Week's Produce</a>
+            <!--     <div class="top-right links">
+               <a href="{{ url('/offers/latestoffer') }}">View and Order This Week's Produce</a>  -->
 
                 </div>
 
@@ -78,7 +78,7 @@
                 </div>
 
 
-               <!--  <p>We will have next week's availability (pickup starting Friday 6/22/18) posted Sunday 6/17/18.</p> -->
+                <p>We will have next week's availability (pickup starting Saturday 8/4/18) posted Monday 7/30/18.</p>
 
                 <!--
                 <div class="links">
