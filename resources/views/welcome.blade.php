@@ -67,8 +67,8 @@
     <body>
         <div class="flex-center position-ref full-height">
 
-            <!--     <div class="top-right links">
-               <a href="{{ url('/offers/latestoffer') }}">View and Order This Week's Produce</a>  -->
+                <div class="top-right links">
+              <!--  <a href="{{ url('/offers/latestoffer') }}">View and Order This Week's Produce</a>  -->
 
                 </div>
 
